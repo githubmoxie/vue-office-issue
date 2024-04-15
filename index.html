@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #preview-pdf,
+        #preview-excel,
+        #preview-docx {
+            width: 100%;
+            height: 1000px;
+        }
+    </style>
+    <link rel="stylesheet" href="./preview-excel/index.css">
+</head>
+
+<body>
+    <h3 style="height: 500px;">excel 预览</h3>
+    <div id="preview-excel"></div>
+    <script type="module">
+        import jsPreviewExcel from "./preview-excel/index.js";
+        const previewers = {
+            xlsx: jsPreviewExcel.init(document.getElementById('preview-excel'))
+        };
+
+        const previewFile = (file, type) => {
+            previewers[type].preview(file).then(() => {
+                console.log('预览完成');
+            }).catch(e => {
+                console.log('预览失败', e);
+            });
+        };
+        previewFile('./3.xlsx', 'xlsx')
+    </script>
+
+</body>
+
+</html>
